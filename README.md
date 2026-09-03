@@ -91,6 +91,15 @@ public class HelloController {
     }
 }
 ```
+### OUTPUT:
+#### Public EndPoint:
+![Public Endpoint](https://github.com/user-attachments/assets/7e1c3289-608c-48bc-a878-0980d7ae074e)
+
+#### Private EndPoint:
+![Private Endpoint](https://github.com/user-attachments/assets/e29e2045-6741-4a60-ae96-ce29b7d0eb26)
+
+![Private Endpoint Authentication](https://github.com/user-attachments/assets/3d0d7cf0-a5f0-4e89-a3d2-f94279eb323f)
+
 
 ## RESULT
 
