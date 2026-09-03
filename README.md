@@ -1,44 +1,54 @@
-# EXP05-Setting-Up-Spring-Security-in-a-Spring-Boot-Project
-## AIM:
-To write a program for setting up Spring Security in a Spring Boot project to secure endpoints with basic authentication and role-based access control.
+# EXP05 - Setting Up Spring Security in a Spring Boot Project
 
-## ALGORITHM:
-Create a Spring Boot Project with the following dependencies:
+## AIM
 
-Spring Web
+To write a program for setting up Spring Security in a Spring Boot project to secure endpoints with Basic Authentication and role-based access control.
 
-Spring Security
+## ALGORITHM
 
-Spring Boot DevTools (optional)
+1. Create a Spring Boot Project with the following dependencies:
 
-Add Spring Security dependency in pom.xml (if not using Spring Initializr).
+   * Spring Web
+   * Spring Security
+   * Spring Boot DevTools (optional)
 
-Create a configuration class extending WebSecurityConfigurerAdapter (or using SecurityFilterChain for newer Spring versions).
+2. Add the Spring Security dependency in `pom.xml` if not using Spring Initializr.
 
-Define an in-memory user with username, password, and roles using UserDetailsService.
+3. Create a configuration class using `SecurityFilterChain` for newer Spring Boot versions.
 
-Secure your REST endpoints using annotations or in the security config class.
+4. Define an in-memory user with username, password, and roles using `UserDetailsService`.
 
-Run and test the app using a browser or Postman:
+5. Secure the REST endpoints using annotations or the security configuration class.
 
-Secure endpoints will prompt for username and password.
+6. Run and test the application using a browser or Postman.
 
-## PROGRAM CODE:
-###pom.xml (Dependencies)
+7. Verify that secured endpoints prompt for username and password.
+
+## PROGRAM CODE
+
+### pom.xml (Dependencies)
+
+```xml
 <dependencies>
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
 </dependencies>
+```
+
 ### SecurityConfig.java (Spring Boot 3.x / Spring Security 6+)
+
+```java
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -46,7 +56,8 @@ public class SecurityConfig {
                 .requestMatchers("/public").permitAll()
                 .anyRequest().authenticated()
             )
-            .httpBasic();
+            .httpBasic(httpBasic -> {});
+
         return http.build();
     }
 
@@ -57,10 +68,15 @@ public class SecurityConfig {
             .password("password")
             .roles("USER")
             .build();
+
         return new InMemoryUserDetailsManager(user);
     }
 }
-###HelloController.java
+```
+
+### HelloController.java
+
+```java
 @RestController
 public class HelloController {
 
@@ -74,3 +90,8 @@ public class HelloController {
         return "This is a secured endpoint. You are authenticated!";
     }
 }
+```
+
+## RESULT
+
+The Spring Boot application was successfully configured with Spring Security to secure endpoints using Basic Authentication and role-based access control.
